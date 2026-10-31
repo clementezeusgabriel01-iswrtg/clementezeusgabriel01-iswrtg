@@ -45,7 +45,7 @@ I prioritize **zero-dependency** implementations to deeply grasp network I/O, co
 
 <p align="center">
   <img src="profile/streak.svg" width="48%" alt="GitHub Streak" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark&langs_count=6&cache_seconds=86400" width="48%" alt="Top Languages" />
+  <img src="profile/top-langs.svg" width="48%" alt="Top Languages" />
 </p>
 
 ---
