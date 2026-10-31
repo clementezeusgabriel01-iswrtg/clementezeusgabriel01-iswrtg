@@ -21,16 +21,8 @@ jobs:
           path: profile/streak.svg
           token: ${{ secrets.STREAK_STATS_TOKEN }}
 
-      - name: Generate Top Languages
-        uses: anuraghazra/github-readme-stats@master
-        with:
-          filename: top-langs.svg
-          options: username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark&langs_count=6
-          token: ${{ secrets.STREAK_STATS_TOKEN }}
-          path: profile/top-langs.svg
-
       - name: Commit and Push Generated Files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Auto-update profile stats SVGs"
+          commit_message: "Auto-update profile streak SVG"
           file_pattern: profile/*.svg
