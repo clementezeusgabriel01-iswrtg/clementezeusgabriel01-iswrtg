@@ -22,11 +22,14 @@ jobs:
           token: ${{ secrets.STREAK_STATS_TOKEN }}
 
       - name: Generate Top Languages
-        uses: kotofurumiya/git-profile-lang-stats@v1
+        uses: lowlighter/metrics@latest
         with:
+          filename: profile/top-langs.svg
           token: ${{ secrets.STREAK_STATS_TOKEN }}
-          path: profile/top-langs.svg
-          theme: dark
+          base: ""
+          plugin_languages: yes
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
 
       - name: Commit and Push Generated Files
         uses: stefanzweifel/git-auto-commit-action@v4
