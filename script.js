@@ -95,10 +95,78 @@
     return card;
   }
 
+  function relativeTime(dateString) {
+    const diffMs = Date.now() - new Date(dateString).getTime();
+    const minutes = Math.floor(diffMs / 60000);
+    if (minutes < 1) return 'just now';
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 30) return `${days}d ago`;
+    const months = Math.floor(days / 30);
+    return `${months}mo ago`;
+  }
+
+  function renderCommitItem(commit) {
+    const item = document.createElement('div');
+    item.className = 'commit-item';
+    item.innerHTML = `
+      <div class="commit-main">
+        <a href="${commit.url}" target="_blank" rel="noopener" class="commit-message">${commit.message}</a>
+        <span class="commit-repo">${commit.repo}</span>
+      </div>
+      <span class="commit-time">${relativeTime(commit.date)}</span>
+    `;
+    return item;
+  }
+
+  function renderCommitList(commits) {
+    const container = document.getElementById('commits-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (!Array.isArray(commits) || commits.length === 0) {
+      container.innerHTML = `<div class="commit-empty">No recent commits found.</div>`;
+      return;
+    }
+
+    commits.forEach(commit => container.appendChild(renderCommitItem(commit)));
+  }
+
+  async function fetchRecentCommits() {
+    const container = document.getElementById('commits-list');
+    if (!container) return;
+
+    try {
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/events/public?per_page=30`);
+      if (!res.ok) throw new Error('Failed to fetch commits');
+      const events = await res.json();
+
+      const commits = [];
+      events
+        .filter(event => event.type === 'PushEvent')
+        .forEach(event => {
+          event.payload.commits.forEach(commit => {
+            commits.push({
+              message: commit.message.split('\n')[0],
+              repo: event.repo.name,
+              date: event.created_at,
+              url: `https://github.com/${event.repo.name}/commit/${commit.sha}`
+            });
+          });
+        });
+
+      renderCommitList(commits.slice(0, 8));
+
+    } catch (err) {
+      container.innerHTML = `<div class="commit-error">Unable to load recent commits.</div>`;
+    }
+  }
+
   async function fetchGitHubRepos() {
     const container = document.getElementById('repos-list');
     const sortSelect = document.getElementById('repo-sort');
-    const loadStart = Date.now();
 
     try {
       const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=30`);
@@ -122,12 +190,18 @@
 
     } catch (err) {
       container.innerHTML = `<div class="repo-error">Unable to load public repositories.</div>`;
-    } finally {
-      setFooterTimestamp();
-      const remaining = 3000 - (Date.now() - loadStart);
-      setTimeout(hideLoadingScreen, Math.max(remaining, 0));
     }
   }
 
-  document.addEventListener('DOMContentLoaded', fetchGitHubRepos);
+  async function loadDashboard() {
+    const loadStart = Date.now();
+
+    await Promise.all([fetchGitHubRepos(), fetchRecentCommits()]);
+
+    setFooterTimestamp();
+    const remaining = 3000 - (Date.now() - loadStart);
+    setTimeout(hideLoadingScreen, Math.max(remaining, 0));
+  }
+
+  document.addEventListener('DOMContentLoaded', loadDashboard);
 })();
