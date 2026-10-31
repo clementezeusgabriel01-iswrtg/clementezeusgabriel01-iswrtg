@@ -1,7 +1,6 @@
 (function () {
   const USERNAME = 'clementezeusgabriel01-iswrtg';
-  const GITHUB_TOKEN = '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';
-  //the token has no scope so you cant do anything with it lol
+  const GITHUB_TOKEN = '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';
 
   function githubHeaders() {
     return GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {};
@@ -149,6 +148,10 @@
         headers: githubHeaders()
       });
 
+      if (res.status === 401) {
+        container.innerHTML = `<div class="commit-error">GitHub token is invalid or expired.</div>`;
+        return;
+      }
       if (res.status === 403) {
         container.innerHTML = `<div class="commit-error">GitHub API rate limit reached. Try again in a few minutes.</div>`;
         return;
@@ -188,6 +191,11 @@
         headers: githubHeaders()
       });
 
+      if (res.status === 401) {
+        container.innerHTML = `<div class="repo-error">GitHub token is invalid or expired.</div>`;
+        renderTotals([]);
+        return;
+      }
       if (res.status === 403) {
         container.innerHTML = `<div class="repo-error">GitHub API rate limit reached. Try again in a few minutes.</div>`;
         return;
@@ -229,3 +237,4 @@
 
   document.addEventListener('DOMContentLoaded', loadDashboard);
 })();
+      
