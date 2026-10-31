@@ -14,7 +14,14 @@
 <body>
   <div id="loading-screen" aria-hidden="false">
     <div class="loading-inner">
-      <span class="loading-prompt">$ fetching stats<span class="cursor">_</span></span>
+      <div class="loading-grid">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="loading-text">Loading contribution data</p>
     </div>
   </div>
 
@@ -64,6 +71,18 @@
         </div>
       </section>
 
+      <section id="contributions" class="contrib-section">
+        <div class="stat-card">
+          <h2 class="stat-card-title">Contribution activity</h2>
+          <div class="stat-card-body contrib-body">
+            <img
+              src="https://ghchart.rshah.org/5b8cff/clementezeusgabriel01-iswrtg"
+              alt="GitHub Contribution Graph"
+            />
+          </div>
+        </div>
+      </section>
+
       <section id="repos" class="repos-section">
         <h2 class="section-title">Recent repositories</h2>
         <div id="repos-list" class="repos-grid">
@@ -82,7 +101,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>Built by Zeus @2026.</span>
+        <span>Built by Zeus @2026.<br>Simple stats website built because of boredom</span>
         <span id="footer-updated" class="footer-updated"></span>
       </div>
     </footer>
