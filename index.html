@@ -44,7 +44,22 @@
 
       <section class="page-intro">
         <h1>Repository statistics</h1>
-        <p>Contribution streak, top languages, and the most recently updated public repositories.</p>
+        <p>Totals, contribution streak, top languages, and public repositories, sortable by stars, forks, or name.</p>
+      </section>
+
+      <section id="totals" class="totals-strip">
+        <div class="total-item">
+          <span class="total-value" id="total-repos">—</span>
+          <span class="total-label">Repositories</span>
+        </div>
+        <div class="total-item">
+          <span class="total-value" id="total-stars">—</span>
+          <span class="total-label">Stars</span>
+        </div>
+        <div class="total-item">
+          <span class="total-value" id="total-forks">—</span>
+          <span class="total-label">Forks</span>
+        </div>
       </section>
 
       <section id="stats" class="stats-grid">
@@ -84,7 +99,15 @@
       </section>
 
       <section id="repos" class="repos-section">
-        <h2 class="section-title">Recent repositories</h2>
+        <div class="repos-header">
+          <h2 class="section-title">Recent repositories</h2>
+          <select id="repo-sort" class="repo-sort" aria-label="Sort repositories">
+            <option value="updated">Recently updated</option>
+            <option value="stars">Most stars</option>
+            <option value="forks">Most forks</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
         <div id="repos-list" class="repos-grid">
           <div class="repo-card skeleton">
             <div class="skeleton-line w-half"></div>
@@ -102,7 +125,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <span>Built by Zeus @2026</span>
-        <span>Simple stats website built because of boredom 🥱 </span>
+        <span>A simple website on HTML, CSS, and JS. <br>"Coffee is optional ☕"</span>
         <span id="footer-updated" class="footer-updated"></span>
       </div>
     </footer>
