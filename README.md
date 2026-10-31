@@ -41,39 +41,11 @@ I prioritize **zero-dependency** implementations to deeply grasp network I/O, co
 
 ---
 
-### 🚀 Featured Systems & Projects
-
-#### 📦 [TinyVCS](https://github.com/clementezeusgabriel01-iswrtg/TinyVCS)
-> **Minimalist Version Control System built from scratch**
-* **Language:** Python *(Standard Library Only)*
-* Implemented content-addressable storage using SHA-1 object hashing and zlib data compression.
-* Built DAG (Directed Acyclic Graph) commit history traversal and local index staging.
-
-#### 🌊 [RaftDB](https://github.com/clementezeusgabriel01-iswrtg/RaftDB)
-> **Fault-tolerant, distributed key-value store**
-* **Language:** Python *(Standard Library Only)*
-* Custom TCP socket streaming and length-prefixed protocol framing.
-* Implemented core Raft consensus: randomized leader election, heartbeat mechanism, log replication, and local disk persistence.
-
-#### ⚡ [NIO-Pulse](https://github.com/clementezeusgabriel01-iswrtg/NIO-Pulse)
-> **Non-blocking HTTP/1.1 Web Server**
-* **Language:** Java *(Java NIO & `java.util.concurrent`)*
-* Handled async event loops and non-blocking channel selectors without external web frameworks.
-* Built custom HTTP header parsing, dynamic request routing, and thread-safe connection pooling.
-
-#### 💬 [TerminalNode](https://github.com/clementezeusgabriel01-iswrtg/TerminalNode)
-> **Asynchronous P2P Terminal Chat Node**
-* **Language:** Python *(AsyncIO)*
-* Single-file peer-to-peer messaging system over raw TCP sockets.
-* Utilizes 4-byte length-prefixed JSON framing for reliable streaming over socket networks.
-
----
-
 ### 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=clementezeusgabriel01-iswrtg&show_icons=true&theme=dark&count_private=true" alt="Zeus's GitHub Stats" width="48%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark" alt="Top Languages" width="48%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=clementezeusgabriel01-iswrtg&theme=dark" width="48%" alt="GitHub Streak" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark&langs_count=6&hide_border=true&cache_seconds=1800" width="48%" alt="Top Languages" />
 </p>
 
 ---
@@ -84,4 +56,3 @@ I prioritize **zero-dependency** implementations to deeply grasp network I/O, co
 * 💼 **GitHub:** [@clementezeusgabriel01-iswrtg](https://github.com/clementezeusgabriel01-iswrtg)
 
 ---
-<p align="center"><i>Hindi mo kailangang maging perpekto para magsimula, dahil ang kailangan mo lang magsimula.</i></p>
