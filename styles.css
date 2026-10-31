@@ -30,21 +30,46 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-.loading-prompt {
+.loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 10px);
+  grid-auto-rows: 10px;
+  gap: 4px;
+}
+
+.loading-grid span {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #242836;
+  animation: glow 1.6s ease infinite;
+}
+
+.loading-grid span:nth-child(7n+1) { animation-delay: 0s; }
+.loading-grid span:nth-child(7n+2) { animation-delay: 0.08s; }
+.loading-grid span:nth-child(7n+3) { animation-delay: 0.16s; }
+.loading-grid span:nth-child(7n+4) { animation-delay: 0.24s; }
+.loading-grid span:nth-child(7n+5) { animation-delay: 0.32s; }
+.loading-grid span:nth-child(7n+6) { animation-delay: 0.4s; }
+.loading-grid span:nth-child(7n+7) { animation-delay: 0.48s; }
+
+@keyframes glow {
+  0%, 100% { background: #242836; }
+  50% { background: #5b8cff; }
+}
+
+.loading-text {
+  margin: 0;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: #8a8fa3;
-  letter-spacing: 0.01em;
-}
-
-.cursor {
-  display: inline-block;
-  color: #5b8cff;
-  animation: blink 1s steps(1) infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
 }
 
 .page {
@@ -158,6 +183,19 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   min-height: 150px;
+}
+
+.contrib-section {
+  margin-bottom: 2.5rem;
+}
+
+.contrib-body {
+  overflow-x: auto;
+  justify-content: flex-start;
+}
+
+.contrib-body img {
+  min-width: 480px;
 }
 
 .section-title {
@@ -300,6 +338,9 @@ a { color: inherit; text-decoration: none; }
   .stats-grid, .repos-grid {
     grid-template-columns: 1fr;
   }
+  .loading-grid {
+    grid-template-columns: repeat(5, 10px);
+  }
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -308,6 +349,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor, .skeleton-line { animation: none; }
+  .loading-grid span, .skeleton-line { animation: none; }
   #loading-screen { transition: none; }
-  }
+}
