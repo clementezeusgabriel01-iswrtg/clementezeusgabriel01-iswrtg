@@ -18,8 +18,9 @@ Here are some ideas to get you started:
 # Hi there, I'm Zeus 👋 
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-zeusgabrielmc--portfolio.netlify.app-000000?style=for-the-badge&logo=netlify&logoColor=white)](https://zeusgabrielmc-portfolio.netlify.app)
-[![GitHubStats](https://zeus-project-stats.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](#)
+
+[Zeus's GitHub Stats](https://zeus-project-stats.vercel.app/)
 
 I am a **1st-Year BSIT Student** with a focus on systems programming, networking, and distributed systems architecture. I enjoy building low-level tools, custom protocols, and storage engines from scratch using pure standard libraries.
 
