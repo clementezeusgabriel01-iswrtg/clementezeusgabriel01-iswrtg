@@ -1,5 +1,11 @@
 (function () {
   const USERNAME = 'clementezeusgabriel01-iswrtg';
+  const GITHUB_TOKEN = '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';
+  //the token has no scope so you cant do anything with it lol
+
+  function githubHeaders() {
+    return GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {};
+  }
 
   function hideLoadingScreen() {
     const screen = document.getElementById('loading-screen');
@@ -139,13 +145,22 @@
     if (!container) return;
 
     try {
-      const res = await fetch(`https://api.github.com/users/${USERNAME}/events/public?per_page=30`);
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/events/public?per_page=30`, {
+        headers: githubHeaders()
+      });
+
+      if (res.status === 403) {
+        container.innerHTML = `<div class="commit-error">GitHub API rate limit reached. Try again in a few minutes.</div>`;
+        return;
+      }
       if (!res.ok) throw new Error('Failed to fetch commits');
+
       const events = await res.json();
+      if (!Array.isArray(events)) throw new Error('Unexpected response');
 
       const commits = [];
       events
-        .filter(event => event.type === 'PushEvent')
+        .filter(event => event.type === 'PushEvent' && event.payload && Array.isArray(event.payload.commits))
         .forEach(event => {
           event.payload.commits.forEach(commit => {
             commits.push({
@@ -169,9 +184,18 @@
     const sortSelect = document.getElementById('repo-sort');
 
     try {
-      const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=30`);
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=30`, {
+        headers: githubHeaders()
+      });
+
+      if (res.status === 403) {
+        container.innerHTML = `<div class="repo-error">GitHub API rate limit reached. Try again in a few minutes.</div>`;
+        return;
+      }
       if (!res.ok) throw new Error('Failed to fetch repositories');
+
       const repos = await res.json();
+      if (!Array.isArray(repos)) throw new Error('Unexpected response');
 
       if (!Array.isArray(repos) || repos.length === 0) {
         container.innerHTML = `<div class="repo-empty">No public repositories found.</div>`;
