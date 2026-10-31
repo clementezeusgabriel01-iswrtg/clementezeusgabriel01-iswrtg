@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -15,9 +17,9 @@ jobs:
       - name: Generate Streak Stats
         uses: DenverCoder1/github-readme-streak-stats@v1
         with:
-          options: user=clementezeusgabriel01-iswrtg&theme=tokyonight&background=0d1117
+          options: user=clementezeusgabriel01-iswrtg&theme=dark&background=0d1117
           path: profile/streak.svg
-          token: ${{ secrets.STRE_TOKEN }} # (or keep your STREAK_STATS_TOKEN)
+          token: ${{ secrets.STREAK_STATS_TOKEN }}
 
       - name: Generate Top Languages
         uses: anuraghazra/github-readme-stats@master
@@ -27,8 +29,8 @@ jobs:
           token: ${{ secrets.STREAK_STATS_TOKEN }}
           path: profile/top-langs.svg
 
-      - name: Commit Generated Files
+      - name: Commit and Push Generated Files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update profile stats SVGs"
+          commit_message: "Auto-update profile stats SVGs"
           file_pattern: profile/*.svg
