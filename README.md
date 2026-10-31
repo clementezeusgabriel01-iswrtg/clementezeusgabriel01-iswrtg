@@ -44,8 +44,8 @@ I prioritize **zero-dependency** implementations to deeply grasp network I/O, co
 ### 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=clementezeusgabriel01-iswrtg&theme=dark" width="48%" alt="GitHub Streak" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark&langs_count=6&hide_border=true&cache_seconds=1800" width="48%" alt="Top Languages" />
+  <img src="profile/streak.svg" width="48%" alt="GitHub Streak" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark&langs_count=6&cache_seconds=86400" width="48%" alt="Top Languages" />
 </p>
 
 ---
