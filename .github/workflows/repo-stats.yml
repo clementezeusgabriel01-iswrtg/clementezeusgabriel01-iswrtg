@@ -36,3 +36,4 @@ jobs:
         with:
           commit_message: "Auto-update profile stats SVGs"
           file_pattern: profile/*.svg
+          pull_strategy: 'NO-FAST-FORWARD'
