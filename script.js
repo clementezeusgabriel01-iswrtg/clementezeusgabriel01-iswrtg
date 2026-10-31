@@ -29,6 +29,46 @@
     }
   }
 
+  function renderTotals(repos) {
+    const repoCount = document.getElementById('total-repos');
+    const starCount = document.getElementById('total-stars');
+    const forkCount = document.getElementById('total-forks');
+    if (!repoCount || !starCount || !forkCount) return;
+
+    const stars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+    const forks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+
+    repoCount.textContent = repos.length;
+    starCount.textContent = stars;
+    forkCount.textContent = forks;
+  }
+
+  function sortRepos(repos, sortBy) {
+    const sorted = repos.slice();
+    switch (sortBy) {
+      case 'stars':
+        return sorted.sort((a, b) => b.stargazers_count - a.stargazers_count);
+      case 'forks':
+        return sorted.sort((a, b) => b.forks_count - a.forks_count);
+      case 'name':
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      default:
+        return sorted.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    }
+  }
+
+  function renderRepoList(repos) {
+    const container = document.getElementById('repos-list');
+    container.innerHTML = '';
+
+    if (!Array.isArray(repos) || repos.length === 0) {
+      container.innerHTML = `<div class="repo-empty">No public repositories found.</div>`;
+      return;
+    }
+
+    repos.forEach(repo => container.appendChild(renderRepoCard(repo)));
+  }
+
   function renderRepoCard(repo) {
     const langColor = getLangColor(repo.language);
 
@@ -57,26 +97,35 @@
 
   async function fetchGitHubRepos() {
     const container = document.getElementById('repos-list');
+    const sortSelect = document.getElementById('repo-sort');
+    const loadStart = Date.now();
 
     try {
-      const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=10`);
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=30`);
       if (!res.ok) throw new Error('Failed to fetch repositories');
       const repos = await res.json();
 
-      container.innerHTML = '';
-
       if (!Array.isArray(repos) || repos.length === 0) {
         container.innerHTML = `<div class="repo-empty">No public repositories found.</div>`;
+        renderTotals([]);
         return;
       }
 
-      repos.forEach(repo => container.appendChild(renderRepoCard(repo)));
+      renderTotals(repos);
+      renderRepoList(sortRepos(repos, sortSelect ? sortSelect.value : 'updated'));
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          renderRepoList(sortRepos(repos, sortSelect.value));
+        });
+      }
 
     } catch (err) {
       container.innerHTML = `<div class="repo-error">Unable to load public repositories.</div>`;
     } finally {
       setFooterTimestamp();
-      hideLoadingScreen();
+      const remaining = 3000 - (Date.now() - loadStart);
+      setTimeout(hideLoadingScreen, Math.max(remaining, 0));
     }
   }
 
